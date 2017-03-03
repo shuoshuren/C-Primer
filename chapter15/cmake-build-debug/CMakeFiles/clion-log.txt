@@ -1,0 +1,4 @@
+D:\Software\tools\cmake-3.6.3\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" D:\WorkSpaces\CLion\c++primer\chapter15
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/WorkSpaces/CLion/c++primer/chapter15/cmake-build-debug

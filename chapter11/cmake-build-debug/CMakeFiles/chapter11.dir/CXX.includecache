@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/WorkSpaces/CLion/c++primer/chapter11/Time.cpp
+iostream
+-
+Time.h
+D:/WorkSpaces/CLion/c++primer/chapter11/Time.h
+
+D:/WorkSpaces/CLion/c++primer/chapter11/Time.h
+iostream
+-
+
+D:/WorkSpaces/CLion/c++primer/chapter11/main.cpp
+iostream
+-
+fstream
+-
+time.h
+D:/WorkSpaces/CLion/c++primer/chapter11/time.h
+
+D:/WorkSpaces/CLion/c++primer/chapter11/time.h
+iostream
+-
+

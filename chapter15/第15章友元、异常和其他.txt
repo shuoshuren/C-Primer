@@ -1,0 +1,143 @@
+15.友元、异常和其他
+15.1友元
+类并非只能拥有友元函数，也可以将类作为友元。友元类的所有方法都可以访问原始类的私有成员和保护成员，另外，也可以只将特定的成员函数指定为另一个类的友元。
+15.1.1友元类
+定义使用关键字friend，友元声明可以位于公有，私有或保护部分，其所在的位置无关紧要。
+eg:friend class Remote;
+
+15.1.2友元成员函数
+避免类循环依赖的方法：使用前向声明（forward declaration）。在需要的类定义前插入类似下面的语句：class TV。
+让整个类成为友元并不需要前向声明，因为友元语句本身就指出是一个类：friend class Remote。
+
+15.1.4共同的友元
+需要使用友元的另一种情况：函数需要访问两个类的私有数据。比如两个类中都有内部时钟，且希望它们能够同步。
+
+15.2嵌套类
+在c++中，可以将类声明放到另一个类中。在另一个类中声明的类被称为嵌套类（nested class）,它通过提供新的类型类作用域来避免名称混乱。
+包含类的成员函数可以创建和使用被嵌套类的对象；而仅当声明位于公有部分，才能在包含类的外面使用嵌套类，而且必须使用作用域解析运算符。
+对类进行嵌套通常是为了帮助实现另一个类，并避免名称冲突。
+对类进行嵌套与包含不同。包含意味着将类对象作为另一个类的成员，而对类进行嵌套不创建类成员，而是定义了一种类型，该类型仅在包含嵌套类声明的类中有效。
+
+15.2.1嵌套类和访问权限
+1。作用域
+嵌套类的声明位置决定了嵌套类的作用域，即它决定了程序的哪些部分可以创建这种类的对象。
+如果嵌套类是在另一个类的私有部分声明的，则只有后者知道它。对派生类而言，嵌套类不可见。
+如果嵌套类是在另一个类的保护部分声明的，则对于后者是可见的，对于外部世界则是不可见的。派生类将知道嵌套类，并可以直接创建这种类型的对象。
+如果嵌套类是在另一个类的公有部分声明的，则允许后者，后者的派生类以及外部世界使用它，在外部世界使用它时，必须使用类限定符。
+
+2.访问控制
+对嵌套类访问权的控制规则（公有，保护，私有，友元）与常规类相同。
+
+15.3异常
+15.3.1调用abort（中止）
+abort（）函数的原型位于头文件cstdlob(或stdlib.h)中，其典型实现是向标准错误流（cerr使用的错误流）发送消息abnormal program termination(程序异常终止),
+然后终止程序，它返回一个随实现而异的值，告诉操作系统（如果程序是由另一个程序调用的，则告诉父进程），处理失败。abort（）是否刷新文件缓冲区（用于存储读到
+文件中的数据的内存区域）取决于实现。如果愿意，也可以使用exit（），改函数刷新文件缓冲区，但不显示消息。
+
+15.3.2返回错误码
+一种比异常终止更灵活的方法是，使用函数的返回值来指出问题。
+
+15.3.3异常机制
+c++异常是对程序运行过程中发送的异常情况的一种响应。异常提供了将控制权从程序的一个部分传递到另一部分的途径。对异常的处理有3个组成部分：
+1.引发异常；
+2.使用处理程序捕获异常；
+3.使用try块。
+
+throw语句实际上是跳转，即命令程序调到另一台语句。throw关键字表示引发异常，紧跟其后的值（字符串或对象）指出了异常的特征。
+catch关键字表示捕获异常。try标识其中特定的异常可能被激活的代码块，后面跟一个或多个catch块。
+如果函数引发了异常，而没有try块或匹配的处理程序，在默认情况下，程序将最终调用abort()函数，但可以修改这种行为。
+
+15.3.4将对象作为异常类型
+通常，引发异常的函数将传递一个对象，这样可以使用不同的异常类型来区分不同的函数在不同情况下引发的异常。另外，对象可以携带信息，
+可以根据这些信息来确定引发异常的原因 。同时catch块可以根据这些信息来决定采取什么样的措施。
+
+15.3.6栈解退
+提示：如果有一个异常类继承层次结构，应这样排列catch块：将捕获位于层次结构最下面的异常类的catch语句放到最前面，将捕获基类异常的catch语句放在最后面。
+如果不知道异常类型，仍能捕获异常：使用省略号来表示异常类型，从而捕获任何异常；
+eg:catch(...){}
+
+15.3.8exception类
+exception头文件（exception.h 或except.h）定义了exception类，c++中可以将他作为其他异常类的基类。代码可以引发exception异常，也可以将exception类用作基类。
+
+c++库中定义了很多基于exception的异常类型：
+1.stdexcept异常类
+头文件stdexcept定义了其他几个异常类。定义了logic_error和runtime_error类，他们都是以公有方式从exception派生而来。
+这些类的构造函数接受一个string对象作为参数，该参数提供了方法what()以c-风格字符串方式返回字符数据。
+logic_error的错误类型：
+domain_error;（超出范围）
+invalid_argument;（给函数传递一个超出意料之外的值）
+length_error;（没有足够的空间来执行操作）
+out_of_bounds;（指示数组索引错误）
+
+runtime_error的错误类型：
+range_error;（计算结果可能不在函数允许范围之内，但没有发生上溢或下溢错误）
+overflow_error;（上溢错误，计算结果超过某个类型能够表示的最大数量级时）
+underflow_error;（下溢错误，发生在浮点数计算中）
+
+2.bad_alloc异常和new
+对于使用new导致的内存分配问题，c++最新处理方式是让new引发bad_alloc异常。头文件new包含bad_alloc类的异常，
+它是从exception类公有派生出来的。在以前，当无法分配请求的内存量时，new返回一个空指针。
+
+3.空指针和 new
+为了处理new的变化，c++标准提供了一种在失败时返回空指针的new，其用法如下：
+int *pi = new(std::nothrow) int;
+int *pa = new(std::nowthrow) int[500];
+
+15.3.10异常何时会迷失方向
+未捕获异常：
+未捕获异常不会导致程序立即异常终止。相反，程序将首先调用函数terminate().在默认情况下terminate（）调用abort（）函数。
+可指定terminate（）应调用的函数，为此可以调用set_terminate()函数。set_terminate()和terminate()都是在头文件exception中声明的：
+typedef void(*terminate_handler）();
+terminate_handler set_terminate(terminate_handler f) throw();//c++98
+terminate_handler set_terminate(terminate_handler f)noexcept;//c++11
+void terminate();//c++98
+void terminate() noexcept;//c++11
+如果调用多次set_terminate(),则只有最后一次有效。
+
+未知异常：
+如果发生异常规范中没有的异常，程序将调用unexpected()函数，这个函数将调用terminate(),后者在默认情况下将调用abort（），也有一个用于修改unexcepted()的行为的set_unexcepted()函数，这些新函数也是在头文件exception中声明：
+typedef void(*unexpected_handler）();
+unexpected_handler set_unexpected(unexpected_handler f) throw();//c++98
+unexpected_handler set_unexpected(unexpected_handler f)noexcept;//c++11
+void unexpected();//c++98
+void unexpected() noexcept;//c++11
+提供给set_unexpected()的函数的行为有更严格的限制。unexpected_handler()函数可以：
+1.通过调用terminate(),abort(),exit()来终止程序。
+//640
+2.引发异常：
+1).如果引发异常与原来的异常规范匹配，则程序将从那里开始进行正常处理。
+2).如果新引发的异常与原来的异常规范不匹配，且异常规范中没有包括std::bad_exception类型，程序将调用terminate（）。bad_exception是从exception派生而来的，声明位于头文件exception中；
+3).如果新引发的异常与原来的异常规范不匹配，且异常规范中包括std::bad_exception类型，则不匹配的异常将被std::badd_exception异常所取代。
+
+15.4RTTI
+RTTI是运行阶段类型识别（Runtime Type Identification）的简称。旨在为程序在运行阶段确定对象的类型提供一种标准方式。
+15.4.2RTTI工作原理
+C++有3个支持RTTI的元素。
+1.如果可能的话，dynamic_cast运算符将使用一个指向基类的指针来生成一个指向派生类的指针，否则该运算符将返回0-空指针。
+2.typeid运算符返回一个指向对象的类型的值
+3.type_info结构存储了有关特定类型的信息。
+只能讲RTTI用于包含虚函数的类层次结构，只有对于这种类层次结构，才应该将派生对象的地址赋给基类指针。
+运算符：
+1.dynamic_cast运算符：最常用的RTTI组件，不能回答“指针指向的是哪类对象”这样的问题，但能回答“是否可以安全的将对象的地址赋给特定类型的指针”这样的问题。
+用法：
+1).dynamic_cast<Type *>(pt);//如果指向的对象（*pt）的类型为type或是从type直接或间接派生而来的类型，则下面的表达式将指针pt转换为type类型的指针，否则为空指针。
+2).dynamic_cast用于引用，当请求不正确时，dynamic_cast将引发类型为bad_cast的异常，这种异常是从exception类派生而来的，在头文件typeinfo中定义的。
+
+2.typeid运算符和type_info类
+typeid运算符是的能够确定两个对象是否为同种类型，可以接受两种参数：类名，结果为对象的表达式，返回值是一个对type_info对象的引用，type_info是在头文件typeinfo中定义的一个类。type_info类重载了“==”和“！=”运算符。type_info类包含一个name（）成员，该函数返回一个随实现而异的字符串。
+用法：
+typeid(Magnificent) == typeid(*pg);//如果pg是一个空指针，程序将引发bad_typeid异常。该异常类型是从exception类派生而来，在头文件typeinfo中声明
+
+15.5类型转换运算符
+4中类型转换运算符：
+dynamic_cast:使得能够在类层次结构中进行向上转换
+dynamic_cast<type-name>(expression);
+
+const_cast:用于改变值为const或volatile
+const_cast<type-name>(expression);
+
+static_cast:仅当type-那么可隐式转换为expression所属的类型或expression可被隐式转换为type-name所属的类型时，转换才是合法的，否则将出错。
+static_cast<type-name>(expression);
+
+reinterpret_cast:用于执行天生危险的类型转换。
+reinterpret_cast<type-name>(expression);

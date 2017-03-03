@@ -1,0 +1,38 @@
+处理数据
+
+1.c++内置的数据类型分为两种：复合类型和基本类型。基本类型：整数和浮点数，复合类型：数组，字符串，指针，结构体
+3.1.2整型
+整型：char,short,int,long,long long.
+sizeof()返回类型或者变量的长度，单位为字节，sizeof对于类型名括号必须写，对于变量名括号是可选的
+eg：sizeof(int),sizeof n_count
+3.1.3
+头文件climits定义了符号常量来表示类型的限制
+3.1.3.2初始化
+如果不对函数内部的变量进行初始化，则该变量的值不确定，值为创建之前对应内存存储的值
+3.1.3.3c++初始化
+将大括号初始器用于单值变量，首先：使用这种方式等于“=”可以用可以不用：int count = {10};或者int count{10};
+其次：大括号内可以不包含任何值，在这种情况下，变量初始化为零 int count = {};或者int count {}
+最后：防范类型转换错误
+3.1.4无符号
+使用关键字unsigned来创建无符号的整形变量，此外unsigned是unsigned int的缩写
+3.1.8char
+cout.put()//显示一个字符
+3.1.9bool类型
+用bool类型表示真假，用预制的true，false表示真假。true提升转换为int是1，false提升转换为int是0。任何非零值为true，零为false
+
+3.2const限定符
+在c++中使用const限定符来定义常量.eg:const int Months = 12;
+常见做法：将首字母大写提示是常量。
+创建常量的通用格式：const type name = value；
+
+3.3浮点类型
+float，double ，long double
+
+3.4.4类型转换
+强制类型转换的通用格式：
+(typeName)value;
+typeName(value);
+
+3.4.5auto 声明
+在初始化中如果使用auto而不指定变量的类型，编译器将变量类型设置与初始值一样
+eg:auto a = 1;//a是int类型   auto b = 1.5f;//b是float类型

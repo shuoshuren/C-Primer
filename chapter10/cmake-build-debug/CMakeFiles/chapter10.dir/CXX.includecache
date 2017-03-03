@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/WorkSpaces/CLion/c++primer/chapter10/cmake-build-debug/Stock.cpp
+iostream
+-
+Stock.h
+D:/WorkSpaces/CLion/c++primer/chapter10/cmake-build-debug/Stock.h
+
+D:/WorkSpaces/CLion/c++primer/chapter10/cmake-build-debug/Stock.h
+string
+-
+
+D:/WorkSpaces/CLion/c++primer/chapter10/main.cpp
+iostream
+-
+cmake-build-debug/Stock.h
+D:/WorkSpaces/CLion/c++primer/chapter10/cmake-build-debug/Stock.h
+

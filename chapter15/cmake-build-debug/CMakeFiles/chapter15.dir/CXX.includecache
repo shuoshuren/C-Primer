@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/WorkSpaces/CLion/c++primer/chapter15/Tv.cpp
+Tv.h
+D:/WorkSpaces/CLion/c++primer/chapter15/Tv.h
+iostream
+-
+
+D:/WorkSpaces/CLion/c++primer/chapter15/Tv.h
+
+D:/WorkSpaces/CLion/c++primer/chapter15/main.cpp
+iostream
+-
+Tv.h
+D:/WorkSpaces/CLion/c++primer/chapter15/Tv.h
+queuetp.h
+D:/WorkSpaces/CLion/c++primer/chapter15/queuetp.h
+cstdlib
+-
+stdexcept
+-
+rtti.h
+D:/WorkSpaces/CLion/c++primer/chapter15/rtti.h
+ctime
+-
+typeinfo
+-
+
+D:/WorkSpaces/CLion/c++primer/chapter15/queuetp.h
+
+D:/WorkSpaces/CLion/c++primer/chapter15/rtti.cpp
+
+D:/WorkSpaces/CLion/c++primer/chapter15/rtti.h
+iostream
+-
+

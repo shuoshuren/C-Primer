@@ -1,0 +1,20 @@
+5.5 循环和文本输入
+5.5.1使用原始的cin进行输入
+cin读取第一个输入字符。在读取char值时，与读取其他基本类型一样，cin将忽略空格和换行符。发送给cin的输入被缓冲，只有当用户按下回车键后，输入的内容才会被发送给程序。
+
+5.5.2使用cin.get(char)进行补救
+使用cin.get(char)读取输入中下一个字符，并将其赋给变量，使用该函数替换cin>>ch;不会忽略空格。
+
+5.5.4文件尾条件
+“<”符号是Unix和window命令提示符模式的重定向运算符。
+cin.fail() == false;测试文件尾条件
+检测到EOF后，cin将eofbit和failbit设置为1.通过eof（）查看eofbit是否被设置，如果检测到EOF，cin.eof()返回true，否则为false。
+如果eofbit或failbit被设置为1，则fail（）返回true，否则返回false。
+
+istream类提供了可以将istream对象转换为bool值的函数，当cin需要转换为bool值时，改转换函数将会被调用。
+另外，如果最后一次读取成功，则转换后得到的bool值为true，否则为false。
+while(cin){};这比cin.fail()或者cin.eof()更通用，因为可以检测其他失败原因。
+while(cin.get(ch)){};//cin.get(ch)返回值为cin
+
+5.5.5 另一个cin.get()版本
+cin.get();//不接受任何参数的cin.get()函数返回输入中的下一个字符。

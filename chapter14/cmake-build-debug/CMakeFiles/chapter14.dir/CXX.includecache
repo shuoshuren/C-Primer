@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/WorkSpaces/CLion/c++primer/chapter14/main.cpp
+iostream
+-
+stacktp.h
+D:/WorkSpaces/CLion/c++primer/chapter14/stacktp.h
+
+D:/WorkSpaces/CLion/c++primer/chapter14/stacktp.h
+
